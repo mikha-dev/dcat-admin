@@ -56,7 +56,7 @@ class Domain extends Model
         else
            $host = Str::of(config('app.url'))->remove('http://')->remove('https://');
 
-        $domain = self::whereHost($host)->first();
+        $domain = self::where('host', 'like', '%'.$host.'%')->first();
 
         if(!$domain)
             throw new \Exception('Domain not setup. Requiested host: '.$host );
